@@ -5,9 +5,8 @@ pandas==2.0.3                # For data manipulation and analysis
 python-docx==0.8.11          # To work with Microsoft Word documents
 PyPDF2==3.0.1                # For reading and manipulating PDF files
 easyocr==1.7.0               # For optical character recognition (OCR) from images
-transformers==4.33.0         # Hugging Face Transformers library for NLP models
-langchain_community==0.0.35   # Community version of LangChain for building LLM applications
-langchain_core==0.1.47       # Core functionalities of LangChain
-
+transformers==4.33.0         # For state-of-the-art natural language processing
+pillow                        # Add Pillow without version to get the latest
+tokenizers                    # Add tokenizers without version to get the latest
 
 
