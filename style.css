@@ -1,0 +1,53 @@
+/* General dark mode settings */
+body {
+    background-color: #ffffff; /* Dark background for the entire app */
+    color: #000000; /* Light text color */
+}
+
+.stApp {
+    background-color: #121212; /* Dark background for the app */
+}
+/* .response-label{
+    color:#ffffff
+} */
+
+.stMarkdown {
+    color: #787171; /* Light text color for markdown */
+}
+
+
+/* Sidebar styles */
+.sidebar .sidebar-content {
+    background-color: #ffffff; /* Dark grey background for sidebar */
+    color: #0c0c0c; /* Light text color */
+}
+
+/* Input fields */
+.stTextInput input {
+    background-color: #ffffff; /* Dark background for text input */
+    color: #000000; /* Light text color */
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #ffffff; /* Dark button background */
+    color: #000000; /* Light button text */
+}
+
+/* Query History Section */
+.sidebar .query-history {
+    background-color: #ffffff; /* Black background for the query history section */
+    color: #0c0c0c; /* Light text color */
+    padding: 10px; /* Padding for better layout */
+    border-radius: 5px; /* Rounded corners for a smoother look */
+}
+
+/* Response Section */
+.sidebar .response {
+    background-color: #ffffff; /* Dark grey background for the response section */
+    color: #000000; /* Light text color */
+    padding: 10px; /* Padding for better layout */
+    border-radius: 5px; /* Rounded corners for a smoother look */
+}
+
+
