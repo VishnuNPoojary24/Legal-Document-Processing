@@ -4,6 +4,8 @@ transformers==4.31.0
 fpdf==1.7.2
 langchain_core==0.0.13
 langchain_community==0.0.1
+Pillow==9.5.0        # Specify a compatible version of Pillow
+tokenizers==0.13.3   # Use a pre-built version if available
 Ollama==0.1.0
 python-dotenv==1.0.0
 PyPDF2==3.0.1
