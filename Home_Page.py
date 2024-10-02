@@ -210,11 +210,6 @@ def fetch_response_for_query(query_id):
     return response[0] if response else None
 
 def main():
-    
-    nltk.download('punkt')
-    nltk.download('wordnet')
-    nltk.download('omw-1.4')
-    nltk.download('stopwords') 
     # Create the database if it doesn't exist
     #create_database()
     
