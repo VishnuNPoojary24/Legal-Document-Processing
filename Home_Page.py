@@ -2,12 +2,10 @@ import os
 import re
 import openai
 import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
 import streamlit as st
 import sqlite3
 from datetime import datetime
+from groq import Groq
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -120,7 +118,7 @@ def preprocess_text(text):
     preprocessed_text = ' '.join(words)
     return preprocessed_text, text  # Return preprocessed and raw text
 
-def query_chatgpt(prompt):
+#def query_chatgpt(prompt):
     """Query OpenAI's ChatGPT API."""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",  # Or use "gpt-4" if you have access
@@ -129,7 +127,7 @@ def query_chatgpt(prompt):
         ]
     )
     return response.choices[0].message['content'].strip()
-def llama_langchain(input_text,document_text):
+#def llama_langchain(input_text,document_text):
     prompt = ChatPromptTemplate.from_messages(
     [
         ("system", "You are a helpful AI assistant. Please answer questions based on the provided documents and user query."),
@@ -159,6 +157,30 @@ def llama_langchain(input_text,document_text):
                   timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
     conn.commit()
     conn.close()
+
+
+def llama_langchain(input_text, document_text):
+    # Initialize the Groq client with the API key
+    client = Groq(
+        api_key=os.environ.get("GROQ_API_KEY"),
+    )
+    
+    # Combine document text and input text into a formatted question
+    user_message = f"Documents: {document_text}\nQuestions: {input_text}"
+
+    # Send the request to the Llama model via Groq
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_message,
+            }
+        ],
+        model="llama3-8b-8192",  # Use the desired Llama model
+    )
+    
+    # Return the generated response
+    return chat_completion.choices[0].message.content if chat_completion else "No response received."
 
 def insert_query_response(model, query, response):
     """Insert the model, query, its response, and the current timestamp into the database."""
