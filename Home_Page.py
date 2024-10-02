@@ -24,23 +24,17 @@ os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
 def download_nltk_resources():
-    try:
-        nltk.data.find('corpora/stopwords')
-    except LookupError:
-        nltk.download('stopwords')
-        
-    try:
-        nltk.data.find('tokenizers/punkt')
-    except LookupError:
-        nltk.download('punkt')
-        
-    try:
-        nltk.data.find('corpora/wordnet')
-    except LookupError:
-        nltk.download('wordnet')
+    """Download necessary NLTK resources."""
+    nltk.download('stopwords', download_dir='/home/appuser/nltk_data')
+    nltk.download('punkt', download_dir='/home/appuser/nltk_data')
+    nltk.download('wordnet', download_dir='/home/appuser/nltk_data')
+
+# Set the NLTK data directory
+nltk.data.path.append('/home/appuser/nltk_data')
 
 # Call the function to ensure resources are downloaded
 download_nltk_resources()
+
 
 
 # Set up Streamlit page configuration
