@@ -3,8 +3,10 @@ import re
 import openai
 import nltk
 
-nltk.download('stopwords')
-nltk.download('punkt')
+if not os.path.exists(nltk.data.find('tokenizers/stopwords')):
+    nltk.download('stopwords')
+if not os.path.exists(nltk.data.find('tokenizers/punkt')):
+    nltk.download('punkt')
 import streamlit as st
 import sqlite3
 from datetime import datetime
