@@ -23,9 +23,9 @@ load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
-nltk.download('stopwords',download_dir='nltk_data/')
-nltk.download('punkt',download_dir='nltk_data/')
-nltk.download('wordnet',download_dir='nltk_data/')
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
 
 
 # Set up Streamlit page configuration
