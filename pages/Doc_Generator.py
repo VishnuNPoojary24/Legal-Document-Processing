@@ -1,6 +1,7 @@
 import streamlit as st
 import openai
 from transformers import pipeline
+from groq import Groq
 from fpdf import FPDF
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -36,25 +37,52 @@ user_input = st.text_area("Enter the rules/conditions for your contract")
 #         ]
 #     )
 #     return response['choices'][0]['message']['content']
+# def generate_with_llama(input_text):
+#     prompt = ChatPromptTemplate.from_messages(
+#     [
+#         ("system", "You are a helpful AI assistant. Please answer questions based on the provided documents and user query."),
+#         ("user", "Documents: {documents}\nQuestions: {question}")
+#     ]
+#     )
+
+#     # Initialize the LLM and output parser
+#     llm = Ollama(model="llama3.1")
+#     output_parser = StrOutputParser()
+#     chain = prompt | llm | output_parser
+
+#     # Combine the extracted document text with the user's question
+#     if input_text:
+#         response = chain.invoke({'documents': input_text, 'question': "Generate the document text in legal document format"})
+#         return response
+#     else:
+#         return "Please upload documents and ask a question."
+
 def generate_with_llama(input_text):
-    prompt = ChatPromptTemplate.from_messages(
-    [
-        ("system", "You are a helpful AI assistant. Please answer questions based on the provided documents and user query."),
-        ("user", "Documents: {documents}\nQuestions: {question}")
-    ]
+    # Initialize the Groq client with the API key
+    client = Groq(
+        api_key=os.environ.get("GROQ_API_KEY"),
     )
 
-    # Initialize the LLM and output parser
-    llm = Ollama(model="llama3.1")
-    output_parser = StrOutputParser()
-    chain = prompt | llm | output_parser
+    # Define the prompt for the model to generate the document
+    user_message = f"Documents: {input_text}\nQuestions: Generate the document text in legal document format."
 
-    # Combine the extracted document text with the user's question
-    if input_text:
-        response = chain.invoke({'documents': input_text, 'question': "Generate the document text in legal document format"})
-        return response
+    # Send the request to the Llama model via Groq
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_message,
+            }
+        ],
+        model="llama3-8b-8192",  # Specify the Llama model being used
+    )
+
+    # Extract and return the generated response
+    if chat_completion and chat_completion.choices:
+        return chat_completion.choices[0].message.content
     else:
         return "Please upload documents and ask a question."
+
 def generate_with_huggingface(model_name, input_text):
     generator = pipeline("text-generation", model=model_name)
     # Using max_new_tokens instead of max_length to handle the length of generated text
