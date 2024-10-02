@@ -2,6 +2,9 @@ import os
 import re
 import openai
 import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 import streamlit as st
 import sqlite3
 from datetime import datetime
@@ -28,9 +31,7 @@ os.environ['LANGCHAIN_TRACING_V2'] = "true"
 st.set_page_config(page_title="Legal Document Processor", page_icon=":page_facing_up:")
 
 # Initialize NLP tools
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
