@@ -23,20 +23,34 @@ load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
+
 def download_nltk_resources():
     """Download necessary NLTK resources."""
+    # Set the custom path for NLTK data
+    nltk_data_dir = os.path.join(os.getcwd(), 'nltk_data')
+    
+    if not os.path.exists(nltk_data_dir):
+        os.makedirs(nltk_data_dir)  # Create the directory if it doesn't exist
+    
+    nltk.data.path.append(nltk_data_dir)  # Append the custom path to NLTK's data path
+
+    # Download stopwords
     try:
         nltk.data.find('corpora/stopwords')
     except LookupError:
-        nltk.download('stopwords', download_dir='/home/appuser/nltk_data')
-    
+        nltk.download('stopwords', download_dir=nltk_data_dir)
+
+    # Download Punkt tokenizer
     try:
         nltk.data.find('tokenizers/punkt')
     except LookupError:
-        nltk.download('punkt', download_dir='/home/appuser/nltk_data')
+        nltk.download('punkt', download_dir=nltk_data_dir)
 
-# Set the NLTK data directory
-nltk.data.path.append('/home/appuser/nltk_data')
+    # Optional: Verify that resources are downloaded
+    if os.path.exists(os.path.join(nltk_data_dir, 'tokenizers', 'punkt')):
+        print("Punkt tokenizer is available.")
+    else:
+        print("Punkt tokenizer is not available, please check downloads.")
 
 # Call the function to ensure resources are downloaded
 download_nltk_resources()
