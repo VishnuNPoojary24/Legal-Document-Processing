@@ -1,6 +1,6 @@
 import os
 import re
-import openai
+import openai 
 import nltk
 import streamlit as st
 import sqlite3
