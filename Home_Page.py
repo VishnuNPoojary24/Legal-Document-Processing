@@ -23,9 +23,23 @@ load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
+
+nltk_data_path = os.path.join(os.getcwd(), "nltk_data")  # Ensure this matches the folder where you placed the NLTK data
+nltk.data.path.append(nltk_data_path)
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+    
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+    
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
 
 
 
