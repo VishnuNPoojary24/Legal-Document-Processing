@@ -2,11 +2,6 @@ import os
 import re
 import openai
 import nltk
-
-if not os.path.exists(nltk.data.find('tokenizers/stopwords')):
-    nltk.download('stopwords')
-if not os.path.exists(nltk.data.find('tokenizers/punkt')):
-    nltk.download('punkt')
 import streamlit as st
 import sqlite3
 from datetime import datetime
@@ -27,6 +22,9 @@ from dotenv import load_dotenv
 load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
+
+nltk.download('stopwords')
+nltk.download('punkt')
 
 
 # Set up Streamlit page configuration
