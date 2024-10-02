@@ -2,6 +2,9 @@ import os
 import re
 import openai
 import nltk
+
+nltk.download('stopwords')
+nltk.download('punkt')
 import streamlit as st
 import sqlite3
 from datetime import datetime
