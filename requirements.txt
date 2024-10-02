@@ -10,4 +10,3 @@ python-dotenv==1.0.1
 python_docx==1.1.2
 streamlit==1.37.1
 transformers==4.44.2
-spacy==3.5.2
