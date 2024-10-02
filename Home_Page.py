@@ -23,9 +23,19 @@ load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
-nltk.download('stopwords')
+# nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('wordnet')
+import ssl
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
 nltk.download('punkt')
-nltk.download('wordnet')
+nltk.download('stopwords')
 
 
 # Set up Streamlit page configuration
