@@ -23,7 +23,8 @@ load_dotenv()
 os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 os.environ['LANGCHAIN_TRACING_V2'] = "true"
 
-
+# Run the script to download the necessary NLTK resources
+os.system('python download_nltk_resources.py')
 
 # Set up Streamlit page configuration
 st.set_page_config(page_title="Legal Document Processor", page_icon=":page_facing_up:")
