@@ -31,3 +31,4 @@ The system utilizes a Python-based backend with key libraries for text extractio
 - **Text Generation**: Utilizes models like OpenAI’s `gpt-3.5-turbo` and `Llama 3.1`.
 - **Database**: SQLite for storing queries, responses, and timestamps.
 
+https://legal-document-processing.streamlit.app/
